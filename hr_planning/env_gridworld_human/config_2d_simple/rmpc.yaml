@@ -1,0 +1,46 @@
+---
+# Copyright (c) 2021, MIT Interactive Robotics Group, PI Julie A. Shah.
+# Authors: Shen Li, Nadia Figueroa, Ankit Shah, Julie A. Shah
+# All rights reserved.
+
+# l_mu = L_{\nabla \mu} = nsH x 0 = 2x0
+# Set of Lipschitz constants on the Gradients of the mean function
+# (per state dimension)
+l_mu: [.05, .05]
+
+# l_sigma = L_{\sigma} = nsH x 0 = 2x0
+# Set of Lipschitz constants of the predictive variance
+# (per state dimension)
+l_sigma: [.05, .05]
+
+# ----------------------------
+# RKHS bound
+bound_Bg: 0.01
+# Sub-Gaussian noise
+bound_lambda: 0.25
+bound_delta: 0.1
+bound_gamma_n: 1
+# ----------------------------
+
+n_iterations: 50
+n_experiments: 1
+visualize: True
+save_vis: True
+
+retrain_gp_during_1_itr: False
+h_safe: 4
+
+w_u: [0.001, 0.001]
+w_goal: [1., 1.]
+w_dist_2_pH: 1.
+
+# GP
+m: 500
+pH_subs_init_data:
+  - [8, 2]
+  - [7, 2]
+  - [9, 2]
+pH_rollout_max_length: 20
+
+kern_types: ["rbf", "rbf"]
+...

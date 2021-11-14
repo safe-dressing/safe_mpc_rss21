@@ -1,0 +1,81 @@
+---
+# Copyright (c) 2021, MIT Interactive Robotics Group, PI Julie A. Shah.
+# Authors: Shen Li, Nadia Figueroa, Ankit Shah, Julie A. Shah
+# All rights reserved.
+
+# Robotiq = 1 kg
+# https://www.google.com/search?q=robotiq+gripper+weight&oq=robotiq+gripper+weight&aqs=chrome..69i57.2635j0j7&sourceid=chrome&ie=UTF-8
+mR: 1.
+
+# Human hand weigh 0.575% * 70kg = 0.4kg
+# Human hand + forearm weigh 2.295% * 70kg = 1.6kg
+# https://exrx.net/Kinesiology/Segments
+# https://www.quora.com/How-much-does-a-human-hand-weigh
+mH: 0.5
+
+# dt used for env ode sim
+dt_env: 0.02
+# How often do we update the env, i.e., the amount of time that the function step() will move forward into the future.
+step_time: 1.
+# dt used for rollout human mdp policy as a ref traj for human mpc
+# dt_Hmdp: 1.
+dt_Hmdp: 0.5
+# dt used for robot mpc
+dt_Rmpc: 1.
+# XXX: dt_Rmpc must = step time, because we collect human data in the freq of step_time => pH prediction acts in a freq of step_time => robot planning has to act at a freq of step_time.
+
+H_sde_noise: 0.05
+use_sde: True
+
+pR_0: [0., 0.2]
+pR_0_dressing_2d: [0., 0.2]
+pR_goal: [0.25, 0.1]
+pR_goal_tol: 0.1
+
+# = (2, 7) grid
+pH_0: [0.0, 0.25]
+# pH_goal: [0.5,  0.25]
+
+pH_shoulder: [0.25, 0.1]
+# The number of **new** points between pH and pH_shoulder 
+n_interp_pH_pH_shoulder: 3
+max_dist_bw_pR_arm: 0.1
+
+vR_0: [0., 0.]
+vH_0: [0., 0.]
+
+pR_min: [-0.1, -0.1]
+pR_max: [0.6, 0.6]
+vR_min: [-10., -10.]
+vR_max: [10., 10.]
+
+uR_min: [-0.05, -0.05]
+uR_max: [0.05, 0.05]
+
+Hmpc:
+  # pH bounds are in hmdp.yaml
+  vH_min: [-100., -100.]
+  vH_max: [100., 100.]
+  uH_min: [-100., -100.]
+  uH_max: [100., 100.]
+  # Convert to eye
+  w_ref: 1.
+  w_u: 0.0001
+  w_move_to_pR: 0.3
+  w_avoid_pR: 0.1
+  # dt used for human mpc
+  dt_Hmpc: 0.1
+  # Human is trying to avoid robot
+  # This might be different from pH_pR_min_sep_dist
+  # which is from the robot's view.
+  pH_view_pH_pR_min_sep_dist: 0.1
+
+# safety
+# Worst case = 1, based on <Quanti...> paper
+coeff_restit: 1.
+# 1, 2, 3 N, based on <Quanti...> paper
+F_HR_max_safe_impact: 2
+
+pH_pR_min_sep_dist: 0.02
+dt_pH_pR_safety_checking: 0.01
+...

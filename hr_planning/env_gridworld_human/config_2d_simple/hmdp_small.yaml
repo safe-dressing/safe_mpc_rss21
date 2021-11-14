@@ -1,0 +1,43 @@
+---
+# Copyright (c) 2021, MIT Interactive Robotics Group, PI Julie A. Shah.
+# Authors: Shen Li, Nadia Figueroa, Ankit Shah, Julie A. Shah
+# All rights reserved.
+
+state_space:
+  position:
+    lower_limits: [0, 0]
+    upper_limits: [0.5, 0.5]
+    num_discretizations: [10, 10]
+
+action_space:
+  motion_primitives:
+  -  sub: [0, 0]
+     str: 'w'
+  -  sub: [1, 0]
+     str: 'r'
+  -  sub: [0, 1]
+     str: 'u'
+  -  sub: [-1, 0]
+     str: 'l'
+  -  sub: [0, -1]
+     str: 'd'
+  -  sub: [1, 1]
+     str: 'ur'
+  -  sub: [1, -1]
+     str: 'dr'
+  -  sub: [-1, 1]
+     str: 'ul'
+  -  sub: [-1, -1]
+     str: 'dl'
+
+goal_positions: [0,  0.45]
+obstacles_positions:
+  - lbs: [0., 0.1]
+    ubs: [0.2, 0.3]
+
+rewards:
+  goal: 1.
+  obstacle: -10.
+  step: -1.
+ 
+...

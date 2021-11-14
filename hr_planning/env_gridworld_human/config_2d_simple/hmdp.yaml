@@ -1,0 +1,44 @@
+---
+# Copyright (c) 2021, MIT Interactive Robotics Group, PI Julie A. Shah.
+# Authors: Shen Li, Nadia Figueroa, Ankit Shah, Julie A. Shah
+# All rights reserved.
+
+state_space:
+  position:
+    # We cannot make pH_0, pR_0 always on the boundary, since ode / sde will might cause state bound violation. If we always clip it, the agent won't be able to move based on the ode / sde.
+    lower_limits: [-0.1, -0.1]
+    upper_limits: [0.6, 0.6]
+    num_discretizations: [15, 15]
+
+action_space:
+  motion_primitives:
+  -  sub: [0, 0]
+     str: 'w'
+  -  sub: [1, 0]
+     str: 'r'
+  -  sub: [0, 1]
+     str: 'u'
+  -  sub: [-1, 0]
+     str: 'l'
+  -  sub: [0, -1]
+     str: 'd'
+  -  sub: [1, 1]
+     str: 'ur'
+  -  sub: [1, -1]
+     str: 'dr'
+  -  sub: [-1, 1]
+     str: 'ul'
+  -  sub: [-1, -1]
+     str: 'dl'
+
+goal_positions: [0.3,  0.5]
+obstacles_positions:
+  - lbs: [0.05000000447034836, 0.30000001192092896]
+    ubs: [0.5, 0.45000001788139343]
+
+rewards:
+  goal: 1.
+  obstacle: -10.
+  step: -1.
+ 
+...
