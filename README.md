@@ -15,7 +15,7 @@
 * Tested on `Ubuntu 20.04` with `Python 3.8.10`
 
 ### Installation
-* `export PYTHONPATH=$PYTHONPATH:/home/shen/hr_planning/`
+* `export PYTHONPATH=$PYTHONPATH:/home/.../safe_mpc_rss21/`
 * `sudo apt install python3-pip`
 * `sudo pip3 install numpy`
 * `sudo pip3 install ipython`
@@ -28,6 +28,7 @@
 * `sudo pip3 install sklearn`
 
 ### Run experiments and get results (`Table 2` and `Figure 6`)
+* `cd /home/.../safe_mpc_rss21/hr_planning/`
 * Safe MPC that only does collision avoidance
   * `./run_ca_0.sh`
   * `./run_ca_1.sh`
@@ -38,6 +39,8 @@
   * `python3 result_per_map.py`
   * `python3 result_all_maps.py`
     * This should print the latex code for `Table 2` in the paper.
+* Safe MPC in robot-assisted dressing in 2D
+  * `python3 run_mpc_iterations_experiments.py --pR_mode=CA --task=dressing_2d --pH_mode=pH_indep_pR --seed=5 --hmdp_name=hmdp.yaml`
 
 
 ## Contact

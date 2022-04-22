@@ -367,7 +367,7 @@ def main(seed, pR_mode, task, pH_mode, hmdp_name):
 
                     if task == "dressing_2d":
                         interp_2_pHs_1_T = cfg.safempc.interp_ellipsoids(
-                                pHs_1_T.toarray(), qHs_1_T.toarray())
+                                pHs_1_T.toarray())
                         for k, pHs_1_T_interp in interp_2_pHs_1_T.items():
                             ax, handles = cfg.env.plot_ellipsoid_traj(
                                     pHs_1_T_interp, qHs_1_T,
